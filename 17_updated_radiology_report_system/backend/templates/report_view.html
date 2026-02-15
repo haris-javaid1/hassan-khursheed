@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Report - {{ report.serial_number }}</title>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+        }
+
+        .info {
+            margin: 20px 0;
+        }
+
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>RADIOLOGY REPORT</h1>
+        <p style="text-align: center; color: #666;">Serial: {{ report.serial_number }}</p>
+        <hr>
+
+        <div class="info">
+            <p><span class="label">Patient Name:</span> {{ report.patient_name }}</p>
+            <p><span class="label">UHID:</span> {{ report.uhid or 'N/A' }}</p>
+            <p><span class="label">Age/Sex:</span> {{ report.age_sex or 'N/A' }}</p>
+            <p><span class="label">Scan Type:</span> {{ report.scan_type or 'N/A' }}</p>
+            <p><span class="label">Report Date:</span> {{ report.report_date or 'N/A' }}</p>
+        </div>
+
+        <h3>Findings:</h3>
+        <p>{{ report.doctor_description or 'No findings recorded.' }}</p>
+
+        <h3>Impression:</h3>
+        <p>{{ report.impression or 'No impression recorded.' }}</p>
+
+        <p style="text-align: center; margin-top: 40px; color: #999;">
+            Generated: {{ report.created_at }}
+        </p>
+    </div>
+</body>
+
+</html>

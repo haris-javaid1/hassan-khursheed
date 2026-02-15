@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>View Reports</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1>Radiology Report System</h1>
+        <div>
+            <a href="index.html">Create Report</a>
+            <a href="reports.html">View Reports</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2>All Radiology Reports</h2>
+
+        <!-- Loading Message -->
+        <div id="loading">Loading reports...</div>
+
+        <!-- Reports Table -->
+        <div id="reportsContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Serial Number</th>
+                        <th>Patient Name</th>
+                        <th>Age/Sex</th>
+                        <th>Scan Type</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="reportsTable">
+                    <!-- Reports will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- No Reports Message -->
+        <div id="noReports" style="display: none;">
+            <p>No reports found. <a href="index.html">Create your first report</a></p>
+        </div>
+    </div>
+
+    <script src="reports.js"></script>
+</body>
+
+</html>

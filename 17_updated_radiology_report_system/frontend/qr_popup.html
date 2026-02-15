@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>QR Code</title>
+    <meta charset="UTF-8">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 28px;
+        }
+
+        .serial {
+            color: #7f8c8d;
+            font-size: 13px;
+            background: #f8f9fa;
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 3px solid #3498db;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+        }
+
+        .qr-image {
+            width: 280px;
+            height: 280px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .instructions {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 25px;
+            text-align: left;
+            border-left: 4px solid #3498db;
+        }
+
+        .instructions h3 {
+            color: #2c3e50;
+            font-size: 16px;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .instructions ol {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin: 10px 0;
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .instructions strong {
+            color: #2c3e50;
+        }
+
+        .link-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .link-label {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .link-box {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            word-break: break-all;
+            font-size: 11px;
+            color: #555;
+            border: 1px solid #dee2e6;
+            font-family: 'Courier New', monospace;
+        }
+
+        .btn-container {
+            margin-top: 25px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+        }
+
+        .btn-secondary {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #7f8c8d;
+        }
+
+        .tip {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            color: #856404;
+            padding: 10px;
+            border-radius: 6px;
+            margin-top: 15px;
+            font-size: 12px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>
+                <span class="icon">📱</span>
+                Scan QR Code
+            </h2>
+            <span class="serial" id="serialNumber">Serial: Loading...</span>
+        </div>
+
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="QR Code" class="qr-image" />
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Scan:</h3>
+            <ol>
+                <li>Ensure your phone is on <strong>same WiFi network</strong></li>
+                <li>Open your phone's <strong>Camera app</strong></li>
+                <li>Point the camera at the QR code above</li>
+                <li>Tap the notification to view the report</li>
+            </ol>
+
+            <div class="link-section">
+                <div class="link-label">Or manually copy this link:</div>
+                <div class="link-box" id="reportLink">Loading...</div>
+            </div>
+        </div>
+
+        <div class="tip">
+            💡 Tip: Make sure both devices are on WiFi: 192.168.100.x
+        </div>
+
+        <div class="btn-container">
+            <a id="openReportBtn" href="#" target="_blank" class="btn btn-primary">
+                🖥️ Open Report
+            </a>
+            <button onclick="window.close()" class="btn btn-secondary">
+                Close
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const serial = urlParams.get('serial');
+        const qrUrl = urlParams.get('qrUrl');
+        const reportUrl = urlParams.get('reportUrl');
+
+        // Update page content
+        if (serial && qrUrl && reportUrl) {
+            document.title = `QR Code - ${serial}`;
+            document.getElementById('serialNumber').textContent = `Serial: ${serial}`;
+            document.getElementById('qrImage').src = qrUrl;
+            document.getElementById('reportLink').textContent = reportUrl;
+            document.getElementById('openReportBtn').href = reportUrl;
+        } else {
+            document.getElementById('serialNumber').textContent = 'Error: Missing parameters';
+            document.getElementById('reportLink').textContent = 'Error loading data';
+        }
+    </script>
+</body>
+
+</html>
