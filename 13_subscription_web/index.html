@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Package Selection</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Choose Your Package</h1>
+
+        <div class="packages">
+
+            <div class="package-card">
+                <h2 class="package-name">Basic</h2>
+                <div class="package-price">$9.99<span>/month</span></div>
+                <ul class="features">
+                    <li>Feature 1</li>
+                    <li>Feature 2</li>
+                    <li>Email Support</li>
+                </ul>
+                <button class="select-btn" onclick="selectPackage('basic')">
+                    Select Basic
+                </button>
+            </div>
+
+            <div class="package-card featured">
+                <div class="featured-badge">Most Popular</div>
+                <h2 class="package-name">Standard</h2>
+                <div class="package-price">$19.99<span>/month</span></div>
+                <ul class="features">
+                    <li>All Basic Features</li>
+                    <li>Feature 3</li>
+                    <li>Feature 4</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="select-btn" onclick="selectPackage('standard')">
+                    Select Standard
+                </button>
+            </div>
+
+            <div class="package-card">
+                <h2 class="package-name">Premium</h2>
+                <div class="package-price">$29.99<span>/month</span></div>
+                <ul class="features">
+                    <li>All Standard Features</li>
+                    <li>Feature 5</li>
+                    <li>Feature 6</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="select-btn" onclick="selectPackage('premium')">
+                    Select Premium
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>

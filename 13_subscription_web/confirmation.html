@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Confirmation</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body class="center-page">
+    <div class="confirmation-container">
+
+        <div class="success-icon">✓</div>
+
+        <h1>Payment Successful!</h1>
+
+        <p class="message">
+            Thank you for your subscription.
+        </p>
+
+        <div class="details">
+            <div class="detail-item">
+                <span>Status:</span>
+                <span class="detail-value">Completed</span>
+            </div>
+
+            <div class="detail-item">
+                <span>Date:</span>
+                <span class="detail-value" id="date"></span>
+            </div>
+
+            <div class="detail-item">
+                <span>Next Steps:</span>
+                <span class="detail-value">Check your email</span>
+            </div>
+        </div>
+
+        <a href="/" class="btn">Back to Home</a>
+
+        <p class="note">
+            Confirmation email sent.
+        </p>
+
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>

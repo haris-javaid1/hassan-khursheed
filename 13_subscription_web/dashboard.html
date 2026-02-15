@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body class="center-page">
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <h1>Vitruvia Subscriptions</h1>
+            <a href="/" class="btn logout-btn">Logout</a>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <h2>Welcome, {{FULL_NAME}}!</h2>
+
+            <div class="subscription-card">
+                <h3>Current Subscription</h3>
+                <p><strong>Package:</strong> {{PACKAGE}}</p>
+                <p><strong>Price:</strong> ${{PRICE}} / month</p>
+                <p><strong>Status:</strong> {{STATUS}}</p>
+                <button class="btn upgrade-btn" onclick="alert('Upgrade flow coming soon!')">Upgrade / Change
+                    Plan</button>
+            </div>
+
+            <div class="recent-activity">
+                <h3>Recent Payments</h3>
+                <p>No recent payments yet.</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>
