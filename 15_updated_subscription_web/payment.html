@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Complete Your Payment</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="auth-page">
+        <div class="payment-wrapper">
+            <div class="payment-header">
+                <h1>Complete Your Payment</h1>
+                <p class="auth-subtitle">You're one step away from getting started</p>
+            </div>
+
+            <div class="order-summary-card">
+                <div class="summary-header">
+                    <svg class="summary-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm5 6a1 1 0 10-2 0v3.586l-1.293-1.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <h3>Order Summary</h3>
+                </div>
+                <div class="summary-content">
+                    <div class="summary-row">
+                        <span class="summary-label">Package:</span>
+                        <span class="summary-value" id="packageName">{{PACKAGE}}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Billing Cycle:</span>
+                        <span class="summary-value">Monthly</span>
+                    </div>
+                    <div class="summary-divider"></div>
+                    <div class="summary-row summary-total">
+                        <span class="summary-label">Total Due Today:</span>
+                        <span class="summary-price">$<span id="price">{{PRICE}}</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="alert alert-info">
+                <svg class="alert-icon" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                        d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                        clip-rule="evenodd" />
+                </svg>
+                <div>
+                    <strong>Test Mode Active</strong>
+                    <p>Use token: <code>tok_visa</code> for testing</p>
+                </div>
+            </div>
+
+            <div class="alert alert-error" id="errorMsg"></div>
+
+            <form id="paymentForm" action="/api/payment" method="POST" class="payment-form">
+                <input type="hidden" name="user_id" value="{{USER_ID}}">
+                <input type="hidden" name="package" value="{{PACKAGE}}">
+
+                <div class="form-group">
+                    <label for="token">
+                        <svg class="input-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M4 4a2 2 0 00-2 2v1h16V6a2 2 0 00-2-2H4z" />
+                            <path fill-rule="evenodd"
+                                d="M18 9H2v5a2 2 0 002 2h12a2 2 0 002-2V9zM4 13a1 1 0 011-1h1a1 1 0 110 2H5a1 1 0 01-1-1zm5-1a1 1 0 100 2h1a1 1 0 100-2H9z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Stripe Test Token
+                    </label>
+                    <input type="text" id="token" name="token" value="tok_visa" placeholder="tok_visa" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="cardholder">
+                        <svg class="input-icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Cardholder Name
+                    </label>
+                    <input type="text" id="cardholder" placeholder="John Doe" required>
+                </div>
+
+                <div class="payment-security">
+                    <svg class="security-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>Your payment is secured with 256-bit SSL encryption</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-large" id="payBtn">
+                    <svg class="btn-icon-left" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span>Pay Securely</span>
+                </button>
+
+                <p class="payment-note">By completing this payment, you agree to our Terms of Service and Privacy Policy
+                </p>
+            </form>
+
+            <div class="back-link">
+                <a href="/">
+                    <svg class="back-icon" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    Back to Packages
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+</body>
+
+</html>
