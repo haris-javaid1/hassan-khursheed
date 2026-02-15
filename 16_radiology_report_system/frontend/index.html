@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Create Radiology Report</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1>Radiology Report System</h1>
+        <div>
+            <a href="index.html">Create Report</a>
+            <a href="reports.html">View Reports</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2>Create New Radiology Report</h2>
+
+        <!-- Message Area -->
+        <div id="message"></div>
+
+        <!-- Report Form -->
+        <form id="reportForm">
+
+            <!-- Patient Information -->
+            <div class="section">
+                <h3>Patient Information</h3>
+
+                <div class="row">
+                    <div class="field">
+                        <label>UHID:</label>
+                        <input type="text" name="uhid">
+                    </div>
+                    <div class="field">
+                        <label>SI No:</label>
+                        <input type="text" name="sl_no">
+                    </div>
+                    <div class="field">
+                        <label>Reg No:</label>
+                        <input type="text" name="reg_no">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label>Patient No:</label>
+                        <input type="text" name="patient_no">
+                    </div>
+                    <div class="field">
+                        <label>Patient Name: *</label>
+                        <input type="text" name="patient_name" required>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label>Report Date:</label>
+                        <input type="date" name="report_date">
+                    </div>
+                    <div class="field">
+                        <label>Age/Sex:</label>
+                        <input type="text" name="age_sex" placeholder="e.g., 32Y | Female">
+                    </div>
+                    <div class="field">
+                        <label>Origin:</label>
+                        <input type="text" name="origin_ethe">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field full">
+                        <label>Referred By:</label>
+                        <input type="text" name="ref_by" placeholder="Dr. Name">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scan Details -->
+            <div class="section">
+                <h3>Scan Details</h3>
+
+                <div class="row">
+                    <div class="field">
+                        <label>Film No:</label>
+                        <input type="text" name="film_no">
+                    </div>
+                    <div class="field">
+                        <label>Scan Time:</label>
+                        <input type="text" name="scan_time" placeholder="e.g., 09/11/2023 01:56 PM">
+                    </div>
+                    <div class="field">
+                        <label>Report Time:</label>
+                        <input type="text" name="report_time" placeholder="e.g., 09/11/2023 03:31 PM">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <label>TAT:</label>
+                        <input type="text" name="tat" placeholder="e.g., 1 Hr 20 min">
+                    </div>
+                    <div class="field">
+                        <label>Scan Type:</label>
+                        <input type="text" name="scan_type" placeholder="e.g., CECT WHOLE ABDOMEN">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Doctor's Description -->
+            <div class="section">
+                <h3>Doctor's Description / Findings</h3>
+                <textarea name="doctor_description" rows="12" placeholder="Enter detailed findings here..."></textarea>
+            </div>
+
+            <!-- Impression -->
+            <div class="section">
+                <h3>Impression</h3>
+                <textarea name="impression" rows="6" placeholder="Enter diagnostic impression..."></textarea>
+            </div>
+
+            <!-- Buttons -->
+            <div class="buttons">
+                <button type="button" onclick="resetForm()">Clear Form</button>
+                <button type="submit">Save Report</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

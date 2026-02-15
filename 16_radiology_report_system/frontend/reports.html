@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>View Reports</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <h1>Radiology Report System</h1>
+        <div>
+            <a href="index.html">Create Report</a>
+            <a href="reports.html">View Reports</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h2>All Radiology Reports</h2>
+
+        <!-- Loading Message -->
+        <div id="loading">Loading reports...</div>
+
+        <!-- Reports Table -->
+        <div id="reportsContainer" style="display: none;">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>UHID</th>
+                        <th>Patient Name</th>
+                        <th>Report Date</th>
+                        <th>Age/Sex</th>
+                        <th>Scan Type</th>
+                        <th>Export</th>
+                    </tr>
+                </thead>
+                <tbody id="reportsTable">
+                    <!-- Reports will be loaded here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- No Reports Message -->
+        <div id="noReports" style="display: none;">
+            <p>No reports found. <a href="index.html">Create your first report</a></p>
+        </div>
+    </div>
+
+    <script>
+        // API URL
+        const API_URL = 'http://localhost:8000/api';
+
+        // Load reports when page loads
+        window.onload = function () {
+            loadReports();
+        };
+
+        // Function to load all reports
+        function loadReports() {
+            fetch(`${API_URL}/reports`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+
+                    if (data.length === 0) {
+                        document.getElementById('noReports').style.display = 'block';
+                    } else {
+                        document.getElementById('reportsContainer').style.display = 'block';
+                        displayReports(data);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    document.getElementById('loading').innerHTML = 'Error loading reports. Make sure backend is running.';
+                });
+        }
+
+        // Function to display reports in table
+        function displayReports(reports) {
+            const tableBody = document.getElementById('reportsTable');
+            tableBody.innerHTML = '';
+
+            reports.forEach(report => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${report.id}</td>
+                    <td>${report.uhid || '-'}</td>
+                    <td>${report.patient_name}</td>
+                    <td>${report.report_date || '-'}</td>
+                    <td>${report.age_sex || '-'}</td>
+                    <td>${report.scan_type || '-'}</td>
+                    <td>
+                        <button onclick="exportReport(${report.id}, 'table')" class="btn-export">Table</button>
+                        <button onclick="exportReport(${report.id}, 'list')" class="btn-export">List</button>
+                        <button onclick="exportReport(${report.id}, 'detailed')" class="btn-export">Detailed</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Function to export report
+        function exportReport(id, format) {
+            window.location.href = `${API_URL}/reports/${id}/export?format=${format}`;
+        }
+    </script>
+</body>
+
+</html>
